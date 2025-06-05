@@ -1,0 +1,9 @@
+{
+    "files.autoSave": "afterDelay",
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.inlineSuggest.enabled": false,
+    "editor.quickSuggestions": {
+        "other": "off"
+    },
+    "editor.snippetSuggestions": "none"
+}
