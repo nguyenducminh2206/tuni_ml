@@ -1,1 +1,1 @@
-# tuni_ml
+# Machine Learning Project for Tampere University
