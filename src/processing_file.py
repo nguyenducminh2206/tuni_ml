@@ -72,3 +72,4 @@ def return_simulation_info(data_path):
             sim_id = file['id'][()][0][0].decode('utf-8')
             
     return f'simulation id: {sim_id}', match
+
