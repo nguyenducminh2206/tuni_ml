@@ -9,6 +9,8 @@ __pycache__/
 data/
 *.h5
 
+*.pkl
+
 # Distribution / packaging
 .Python
 build/
