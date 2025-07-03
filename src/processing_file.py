@@ -3,10 +3,16 @@ import re
 import h5py
 
 def read_file(folder_path):
+    """
+    Find all .h5 files 
+    """
+    h5_files = []
     files = os.listdir(folder_path)
-    files = [f for f in files if os.path.isfile(os.path.join(folder_path, f))]
-    
-    return files
+    for root, _, files in os.walk(folder_path):
+        for file in files:
+            if file.endswith('.h5'):
+                h5_files.append(os.path.join(root, file))
+    return h5_files
 
 def parse_simulation(filename):
     """
@@ -35,11 +41,11 @@ def find_file(data_path, user_params):
     
     """
     files = read_file(data_path)
-    for file_name in files:
-        if file_name.endswith('.h5'):
-            params = parse_simulation(file_name)
-            if params and all(abs(params[key] - user_params[key]) < 1e-6 for key in user_params):
-                return os.path.join(data_path, file_name)
+    for file_path in files:
+        file_name = os.path.basename(file_path)
+        params = parse_simulation(file_name)
+        if params and all(abs(params[key] - user_params[key]) < 1e-6 for key in user_params):
+            return file_path
     return None
 
 def read_user_input():
@@ -69,7 +75,17 @@ def return_simulation_info(data_path):
     if match:
         print('File found>', match)
         with h5py.File(match, 'r') as file:
+            file_name = os.path.basename(match)
             sim_id = file['id'][()][0][0].decode('utf-8')
-            
-    return f'simulation id: {sim_id}', match
+            print(f'File name:{file_name}')
+            return f'simulation id: {sim_id}', match
 
+    else:
+        return 'File not found'
+
+def main():
+    data_path = 'data'
+    print(read_file(data_path))
+
+if __name__ == "__main__":
+    main()
