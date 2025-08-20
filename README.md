@@ -115,15 +115,6 @@ All results (plots, matrices, chosen model) are persisted to `st.session_state` 
 
 ---
 
-## Tips & gotchas
-
-- **Streamlit reruns** on every interaction. This app uses `st.session_state` so outputs don’t “disappear.”
-- **GPU**: default is CPU. To add CUDA, push tensors/models to `device` and select `cuda` if available.
-- **Large datasets**: add `@st.cache_data` to `build_features_10samples_df` to avoid re‑loading on each run.
-- **Reproducibility**: seeds are set (`numpy`, `torch`). For strict determinism, also enable PyTorch deterministic flags.
-
----
-
 ## Example workflow
 
 1. Run the app: `streamlit run app.py`  
@@ -131,16 +122,5 @@ All results (plots, matrices, chosen model) are persisted to `st.session_state` 
 3. **Right / Section A**: pick **model** → click **Training on balanced dataset** → view **Accuracy vs Noise** + **Confusion Matrix**.  
 4. **Right / Section B**: pick a **noise** → click **Train** → view noise‑specific **accuracy** + **confusion matrix**.
 
----
 
-## License
 
-This project is provided for academic use at Tampere University.  
-(Replace with your actual license, e.g., MIT / BSD‑3‑Clause.)
-
----
-
-## Acknowledgements
-
-- Tampere University / collaborators for simulation data and problem formulation.  
-- Open‑source libraries: **Streamlit**, **PyTorch**, **scikit‑learn**, **NumPy**, **Pandas**, **Plotly**, **Matplotlib**, **Seaborn**.
