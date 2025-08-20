@@ -23,12 +23,6 @@ pip install streamlit numpy pandas h5py torch scikit-learn seaborn matplotlib pl
 streamlit run app.py
 ```
 
-> If your `src/` is not on `PYTHONPATH`, either add it (as in `app.py`) or set:  
-> **Windows:** `set PYTHONPATH=%CD%/src`  
-> **macOS/Linux:** `export PYTHONPATH=$PWD/src`
-
----
-
 ## Data format (HDF5)
 
 Each `.h5` file represents one simulation batch and typically encodes parameters in the filename, e.g.  
@@ -75,7 +69,7 @@ The app extracts a compact, cell-wise preview (first *N* samples/file in `extrac
 - `simulation_id`, `sample_key`, `cell_id`, `time_trace`,  
 - `dis_to_target`, `cMax`, `cVariance`, `noise` (parsed from filename).
 
-The left panel is **sticky** (`st.session_state`), so the table and profiles **don’t disappear** when you run training.
+
 
 ### Right panel — Training & Results
 
