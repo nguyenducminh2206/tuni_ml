@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sci-ml"                  
+version = "0.1.0"
+description = "Generic CLI and models for HDF5-based ML "
+readme = "README.md"               
+license = { file = "LICENSE" }     
+requires-python = ">=3.9"
+authors = [{ name = "SCI-ML Project" }]
+dependencies = [
+  "numpy",
+  "pandas",
+  "h5py",
+  "scikit-learn",
+  "matplotlib",
+  "seaborn",
+  "torch",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["sci_ml*"]             # flat layout: package lives at ./sci_ml
+
+[project.scripts]
+sci-ml = "sci_ml.cli.main:main"   # terminal command → function

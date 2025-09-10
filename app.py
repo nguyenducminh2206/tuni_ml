@@ -8,7 +8,7 @@ import streamlit as st
 import plotly.express as px
 
 # --- your local package path (keep) ---
-sys.path.append(os.path.abspath('C:/Users/vpming/tuni_ml/src'))
+sys.path.append(os.path.abspath('C:/Users/PC/tuni_ml/src'))
 
 from pandas.api.types import is_numeric_dtype
 from extract_data import build_features_10samples_df, extract_noise
@@ -89,7 +89,6 @@ def render_wrangler(df, cols, cards_per_row=3):
             with stc:
                 box = st.container()
                 box.markdown(f"**{name}**")
-                box.caption(f"Missing: {missing} ({miss_pct}%)  •  Distinct: {distinct} ({dist_pct}%)")
                 box.markdown(
                     f"<div style='font-size:26px;font-weight:700'>{distinct:,}</div>"
                     f"<div style='opacity:.7;margin-top:-6px'>Distinct values</div>",
@@ -224,7 +223,7 @@ with left:
 
         st.dataframe(
             df_keep[[c for c in ["simulation_id","sample_key","cell_id","time_trace",
-                                 "dis_to_target","cMax","cVariance"] if c in df_keep.columns]].head(200),
+                                 "dis_to_target","cMax","cVariance", "noise"] if c in df_keep.columns]].head(50),
             use_container_width=True, height=360
         )
     else:

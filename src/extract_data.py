@@ -256,10 +256,40 @@ def extract_noise(filename):
     match = re.search(r'noise[_\-]?([0-9.]+)', filename)
     return float(match.group(1) if match else None)
 
+def df_cli(data_path):
+    """
+    For each .h5 file, extracts cellwise time traces and their corresponding distance to target,
+    for the first 10 samples in the file.
+    """
+    rows = []
+    file_paths = read_file(data_path)
+
+    for file_path in file_paths:
+        with h5py.File(file_path, 'r') as f:
+            simulation_ids = [x.decode('utf-8') for x in f['sim_ids'][()]]
+            sample_keys = sorted(f['timeTraces'].keys(), key=lambda x: int(x))[:1]  # first 10 samples
+
+            for sample_idx, sample_key in enumerate(sample_keys):
+                time_traces = np.array(f['timeTraces'][sample_key]).T
+                distance_to_target = np.array(f['tissue']['distanceToTarget'][()])
+                n_cells = time_traces.shape[0]
+
+                for cell_id in range(n_cells):
+                    rows.append({
+                        'simulation_id': simulation_ids[sample_idx],
+                        'sample_key': sample_key,
+                        'cell_id': cell_id,
+                        'time_trace': time_traces[cell_id],
+                        'dis_to_target': distance_to_target[cell_id],
+                        'simulation_file': os.path.basename(file_path)
+                    })
+    df = pd.DataFrame(rows)
+    df.to_csv("processed_data/example_df.csv", index=False)
+    return df
 
 def main():
-    data_path = 'data'
-    build_features_10samples_df(data_path)
+    data_path = 'data_7x7'
+    df_cli(data_path)
 
 
 if __name__ == "__main__":
