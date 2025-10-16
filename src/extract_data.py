@@ -238,12 +238,14 @@ def build_features_100samples_df(data_path):
 
                 for cell_id in range(n_cells):
                     row = {
-                        'simulation_id': simulation_ids[sample_idx],
-                        'sample_key': sample_key,
+                        #'simulation_id': simulation_ids[sample_idx],
+                        #'sample_key': sample_key,
                         'cell_id': cell_id,
                         'time_trace': time_traces[cell_id],
                         'dis_to_target': distance_to_target[cell_id],
-                        'simulation_file': os.path.basename(file_path)
+                        #'simulation_file': os.path.basename(file_path)
+                        'cMax': feature_vectors['cMax'][cell_id],
+                        'cVar': feature_vectors['cVariance'][cell_id]
                     }
                     for feature in feature_names:
                         row[feature] = feature_vectors[feature][cell_id]
@@ -276,12 +278,12 @@ def df_cli(data_path):
 
                 for cell_id in range(n_cells):
                     rows.append({
-                        'simulation_id': simulation_ids[sample_idx],
+                        #'simulation_id': simulation_ids[sample_idx],
                         'sample_key': sample_key,
                         'cell_id': cell_id,
                         'time_trace': time_traces[cell_id],
                         'dis_to_target': distance_to_target[cell_id],
-                        'simulation_file': os.path.basename(file_path)
+                        #'simulation_file': os.path.basename(file_path)
                     })
     df = pd.DataFrame(rows)
     df.to_csv("processed_data/example_df.csv", index=False)
