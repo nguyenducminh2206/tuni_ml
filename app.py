@@ -8,7 +8,7 @@ import streamlit as st
 import plotly.express as px
 
 # --- your local package path (keep) ---
-sys.path.append(os.path.abspath('C:/Users/PC/tuni_ml/src'))
+sys.path.append(os.path.abspath('C:/Users/vpming\MyApps/tuni_ml/src'))
 
 from pandas.api.types import is_numeric_dtype
 from extract_data import build_features_10samples_df, extract_noise
